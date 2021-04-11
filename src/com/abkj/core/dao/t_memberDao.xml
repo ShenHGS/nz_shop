@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.abkj.core.dao.t_memberDao">
+
+
+	<insert id="addVIP" parameterType="com.abkj.core.po.t_member">
+	insert into t_member(name,gender,phone,email,loginname,loginpwd,salt,reg_time,consignee,address,vipl)
+   	values(#{name},#{gender},#{phone},#{email},#{loginname},#{loginpwd},#{salt},#{reg_time},#{consignee},#{address},#{vipl})
+	</insert>
+	
+	<select id="findTmember" parameterType="String" resultType="com.abkj.core.po.t_member">
+	    select *
+	    from t_member
+	    where loginname = #{loginname}
+	    and loginpwd = #{loginpwd}
+    </select>
+    
+    <select id ="findLoginName" parameterType="String" resultType="com.abkj.core.po.t_member">
+    	select * 
+    	from t_member 
+    	where loginname = #{loginname}
+    </select>
+
+    <update id="findByUpdate" parameterType="t_member">
+ 		UPDATE t_member  
+ 		<set> 
+ 		<if test="name != null">
+ 			name=#{name},
+ 		</if>
+ 		<if test="gender != null">
+ 			 gender=#{gender},
+ 		 </if>
+ 		 <if test= "phone != null">
+ 			 phone=#{phone},
+ 		 </if>
+ 		 <if test= "email != null">
+ 			 email=#{email},
+ 		 </if>
+ 		  <if test="salt != null" >
+ 		   salt=#{salt}, 
+ 		  </if>
+ 	   	 <if test="consignee != null">
+ 		 consignee=#{consignee},
+ 	    </if>
+ 		<if test="address != null">
+ 			address=#{address},
+ 		</if>
+ 		 </set>
+ 		  WHERE loginname=#{loginname}
+    </update>
+    
+    <update id="updateLoginpwd" parameterType="t_member">
+    	Update t_member
+    	<set>
+    	<if test="loginpwd != null">
+    		loginpwd=#{loginpwd}
+    	</if>
+    	</set>
+    	 WHERE loginname=#{loginname}
+    </update>
+    <select id="selectTmemberById" parameterType="Integer" resultType="t_member">
+    	SELECT * FROM t_member WHERE mid = #{id}
+    </select>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <sql id="selectT_MemberListWhere">
+        <trim prefix="WHERE" prefixOverrides="AND">
+	       <if test="name != null" >
+	           AND name LIKE "%"#{name}"%"
+	       </if>
+	       <if test="gender != null" >
+	           AND gender LIKE "%"#{gender}"%"
+	       </if>
+	       <if test="phone != null" >
+	           AND phone LIKE "%"#{phone}"%"
+	       </if>
+	       <if test="email != null" >
+	           AND email LIKE "%"#{email}"%"
+	       </if>
+	       <if test="loginname != null" >
+	           AND loginname LIKE "%"#{loginname}"%"
+	       </if>
+	       <if test="vipl > 0" >
+	           AND vipl LIKE "%"#{vipl}"%"
+	       </if> 
+        </trim>
+    </sql>
+    <sql id = "updateT_Member">
+    	
+    </sql>
+    
+    <!-- 查询会员列表 -->
+	<select id="selectT_MemberList" resultType="t_member" parameterType="t_member">
+		SELECT 
+		mid,
+		name,
+		gender,
+		phone,
+		email,
+		loginname,
+		vipl 
+		FROM t_member 
+		<include refid="selectT_MemberListWhere"/>
+		<!-- 执行分页查询 -->
+		<if test="start !=null and rows != null">
+			limit #{start},#{rows}
+		</if>
+	</select>
+	
+	<!-- 查询会员总数 -->
+	<select id="selectT_MemberListCount" resultType="Integer" parameterType="t_member">
+		SELECT count(*) FROM t_member 
+		<include refid="selectT_MemberListWhere"/>
+	</select>
+	
+	<!-- 根据id查询会员信息 -->
+	<select id="selectT_MemberById" resultType="t_member" parameterType="Integer">
+		SELECT * FROM t_member WHERE mid = #{id}
+	</select>
+	
+	<!-- 修改会员信息 -->
+	<update id="updateUser" parameterType="t_member">
+	    update t_member
+	    <set>
+	        <if test="name!=null">
+	            name=#{name},
+	        </if>
+	        <if test="gender!=null">
+	            gender=#{gender},
+	        </if>
+	        <if test="phone!=null">
+	            phone=#{phone},
+	        </if>
+	        <if test="email!=null">
+	            email=#{email},
+	        </if>
+	        <if test="loginpwd!=null">
+	            loginpwd=#{loginpwd},
+	        </if>
+	        <if test="salt!=null">
+	            salt=#{salt},
+	        </if>
+	        <if test="reg_time!=null">
+	            reg_time=#{reg_time},
+	        </if>
+	        <if test="consignee!=null">
+	            consignee=#{consignee},
+	        </if>
+	        <if test="address!=null">
+	            address=#{address},
+	        </if>
+	        <if test="vipl > 0">
+	            vipl=#{vipl},
+	        </if>
+	        
+	    </set>
+	    where mid=#{mid}
+	</update>
+	<delete id="deleteT_Member" parameterType="Integer">
+		DELETE FROM t_member WHERE mid = #{id}
+	</delete>
+</mapper>

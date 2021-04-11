@@ -1,0 +1,84 @@
+@CHARSET "UTF-8";
+/* 列表 */
+.row{
+	padding:30px;
+	margin-top:20px;
+	margin-left:50px;
+}
+.row_title{
+	font-size: 18px;
+	color:#666;
+}
+
+.tbcar_tablediv{
+	margin-top:10px;
+	margin-left:7%;
+	margin-right:7%;
+}
+.tbcar_table{
+	width:80%;
+}
+.tbcar-tr-1{
+	padding:10px;
+}
+.tbcar-center{
+	height:40px;
+	width:50%;
+	color:#999;
+	font-weight: bold;
+	font-size: 14px;
+}
+.tbcar-quantity{
+	height:40px;
+	width:25%;
+	color:#999;
+	font-weight: bold;
+	font-size: 14px;
+	padding:5px;
+}
+.tbcar-price{
+	height:40px;
+	width:20%;
+	color:#999;
+	font-weight: bold;
+	font-size: 14px;
+	padding:5px;
+}
+.tbcar-tr-2{
+	height:80px;
+	width:80%;
+	background-color: #F5F5F5;
+	border-radius:10px;
+}
+.tbcar-img{
+	padding-left:15px;
+	font-weight: bold;
+	font-size: 14px;
+	color:#999;
+}
+
+.row_buttom{
+	height:60px;
+}
+.row_sum{
+	float:right;
+	margin-right:25%;
+	font-size: 18px;
+	color:#666;
+}
+.buttons{
+	margin-right:23%;
+	height:40px;
+}
+.btn-1{
+	width: 80px;
+	 background-color: #ff5555;
+	  border: 0px;
+	  border-radius: 3px;
+	  float:right;
+	  text-align: center;
+	  padding:12px;
+	  margin-right:30px;
+	  color:#fff;
+	  
+}

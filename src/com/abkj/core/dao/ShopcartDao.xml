@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.abkj.core.dao.ShopcartDao">
+<sql id="selectShopcartListWhere">
+        <trim prefix="WHERE" prefixOverrides="AND">
+	       <if test="add_time != null" >
+	        and add_time = #{add_time}
+	       </if>
+	       <if test="price != null" >
+	        and price = #{price}
+	       </if>
+        </trim>
+    </sql>
+    
+<select id="selectShopcartList" parameterType="shopcart" 
+                                           resultType="shopcart">
+		SELECT
+			scid,
+			mid,
+			add_time,
+			gid,
+			num,
+			price,
+			amount
+		FROM
+			t_shopcart
+	<include refid="selectShopcartListWhere"/>
+	<if test="start !=null and rows != null">
+			limit #{start},#{rows}
+		</if>
+	</select>
+
+<select id="selectShopcartListCount" parameterType="shopcart" 
+                                                 resultType="Integer">
+		select count(*) from t_shopcart
+		<include refid="selectShopcartListWhere"/>
+	</select>
+	<insert id="insertShopcart" parameterType="shopcart">
+		insert into t_shopcart(
+				scid,
+				mid,
+				add_time,
+				gid,
+				num,
+				price,
+				amount
+		)
+		values(#{scid},
+				#{mid},
+				#{add_time},
+				#{gid},
+				#{num},
+				#{price},
+				#{amount}
+		)
+	</insert>
+	
+<select id="findShopcartGetByMid" resultType="Shopcart">
+		SELECT * FROM t_shopcart where mid= #{mid}
+</select>
+
+
+<delete id="deleteShopcart" parameterType="Integer">
+	    delete from t_shopcart where mid= #{mid}
+	</delete>
+
+</mapper>

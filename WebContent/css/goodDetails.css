@@ -1,0 +1,105 @@
+
+/* 商品 */
+#g_d{
+	border-left:1px dotted #838383;/* 点线dotted *//* 虚线dashed *//* 实线solid */
+	border-right:1px dotted #838383;
+	width:60%;
+	margin:30px auto;
+	text-align:center;
+	
+}
+
+#g_d1>img{	
+	 margin:10px 0px 0 150px; 
+	/* display:block;  */
+	width:180px;
+	height:200px;
+	border:1px solid #808080;
+	
+}
+#g_ul{
+	float:right;
+	text-align:center;
+	list-style-type:none;
+	 margin:5px 250px 0 0; 
+}
+h1{
+	overflow:hidden;
+	color:black;
+	font-size:28px;
+}
+#g_ul>li{
+	color:#929292;
+	margin:6px;
+	
+}
+lable{
+	color:black;
+}
+#g_ul>li>p{
+	color:red;
+	font-weight:bold;
+	font-size:20px;
+	background:#cfcfcf;
+}
+#g_ul_li{	
+	text-decoration:line-through;/* 文字中间画杠 */
+	color:#808080;
+}
+
+.icona{
+	display:block;
+	width:120px;
+	height:40px;
+	background-size:50px 40px;
+	background-repeat:no-repeat;
+	text-align:right;
+	line-height:40px;
+	padding-right:6px;
+	/* background-position:center center; */
+	
+}
+.iconb{
+	display:block;
+	width:70px;
+	height:40px;
+	background-size:40px 40px;
+	background-repeat:no-repeat;
+	text-align:right;
+	line-height:40px;
+	padding-right:6px;
+	
+}
+#g_btn1{
+/* 	background:url("${pageContext.request.contextPath}/images/cheche.png"); */
+	background:#f4f4f4;
+	
+}
+#g_btn2{
+	background:#f4f4f4;
+}
+#g_d2{
+	position:static;
+	 margin:20px 0 0 190px;
+} 
+ 
+#g_d3{
+	position:static;
+	margin:45px 0 0 90px;
+	width:750px;
+	height:100px;
+	
+
+ }
+#g_d3>p{
+	border:1px solid #808080;
+	width:65px;
+	
+}
+#g_d3>div{
+	 border:1px solid #c0c0c0; 
+	 width:750px;
+	 height:80px;
+}
+
+

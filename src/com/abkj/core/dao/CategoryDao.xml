@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.abkj.core.dao.CategoryDao">
+	<sql id="selectCategoryListWhere">
+		<trim prefix="WHERE" prefixOverrides="AND">
+			<if test="cname != null">
+				and cname like "%"#{cname}"%"
+			</if>
+			<if test="cid > 0">
+				AND cid = #{cid}
+			</if>
+		</trim>
+	</sql>
+
+	<select id="selectCategoryList" parameterType="category"
+		resultType="category">
+		SELECT
+		cid,
+		cname,
+		pid
+		FROM
+		t_category
+		<include refid="selectCategoryListWhere" />
+		<if test="start !=null and rows != null">
+			limit #{start},#{rows}
+		</if>
+	</select>
+
+	<insert id="insertCategory" parameterType="category">
+		insert into t_category(
+			cname
+		)
+		values(#{cname}
+		)
+	</insert>
+
+	<select id="getCategoryById" parameterType="category"
+		resultType="category">
+		select * from t_category where cid = #{id}
+	</select>
+
+	<select id="selectCategoryListCount" parameterType="category"
+		resultType="Integer">
+		select count(*) from t_category
+		<include refid="selectCategoryListWhere" />
+	</select>
+	<!-- 更新 -->
+	<update id="updateCategory" parameterType="category">
+		update t_category
+		<set>
+			<if test="cid!=null">
+				cid=#{cid},
+			</if>
+			<if test="cname!=null">
+				cname=#{cname},
+			</if>
+			<if test="pid!=null">
+				pid=#{pid},
+			</if>
+		</set>
+		where cid=#{cid}
+	</update>
+
+	<delete id="deleteCategory" parameterType="Integer">
+		delete from t_category where cid=#{id}
+	</delete>
+</mapper>

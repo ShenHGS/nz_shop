@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+ <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.abkj.core.dao.GoodsDao">
+	<sql id="selectGoodsListWhere">
+		<trim prefix="WHERE" prefixOverrides="AND">
+			<if test="gname != null">
+				and gname like "%"#{gname}"%"
+			</if>
+			<if test="price != null">
+				and price = #{price}
+			</if>
+			<if test="inprice != null">
+				and inprice = #{inprice}
+			</if>
+			<if test="description != null">
+				and description = #{description}
+			</if>
+			<if test="identifier != null">
+				and identifier = #{identifier}
+			</if>
+			<if test="inTime != null">
+				and inTime = #{inTime}
+			</if>
+		</trim>
+	</sql>
+
+	<select id="selectGoodsList" parameterType="goods"
+		resultType="goods">
+		SELECT
+		gid,
+		gname,
+		price,
+		inprice,
+		status,
+		description,
+		stock,
+		identifier,
+		pic,
+		inTime,
+		hits,
+		cid
+		FROM
+		t_goods
+		<include refid="selectGoodsListWhere" />
+		<if test="start !=null and rows != null">
+			limit #{start},#{rows}
+		</if>
+	</select>
+
+	<insert id="insertGoods" parameterType="goods">
+		insert into t_goods(
+			gname,
+			price,
+			inprice,
+			description,
+			status,
+			stock,
+			identifier,
+			inTime,
+			hits,
+			cid
+		)
+		values(#{gname},
+			#{price},
+			#{inprice},
+			#{description},
+			#{status},
+			#{stock},
+			#{identifier},
+			#{inTime},
+			#{hits},
+			#{cid}
+		)
+	</insert>
+
+	<select id="getGoodsById" parameterType="goods" 
+	resultType="goods">
+	    select * from t_goods where gid = #{gid}
+	</select>
+
+	<select id="selectGoodsListCount" parameterType="goods"
+		resultType="Integer">
+		select count(*) from t_goods
+		<include refid="selectGoodsListWhere" />
+	</select>
+	<!-- 更新 -->
+	<update id="updateGoods" parameterType="goods">
+		update t_goods
+		<set>
+			<if test="gid!=null">
+				gid=#{gid},
+			</if>
+			<if test="gname!=null">
+				gname=#{gname},
+			</if>
+			<if test="price!=null">
+				price=#{price},
+			</if>
+			<if test="inprice!=null">
+				inprice=#{inprice},
+			</if>
+			<if test="description!=null">
+				description=#{description},
+			</if>
+			<if test="status!=null">
+				status=#{status},
+			</if>
+			<if test="stock!=null">
+				stock=#{stock},
+			</if>
+			<if test="identifier!=null">
+				identifier=#{identifier},
+			</if>
+			<if test="inTime!=null">
+				inTime=#{inTime},
+			</if>
+			<if test="hits!=null">
+				hits=#{hits},
+			</if>
+		</set>
+		where gid=#{gid}
+	</update>
+
+	<delete id="deleteGoods" parameterType="Integer">
+		delete from t_goods where gid=#{id}
+	</delete>
+	
+	<select id="selectGoodsForHot" resultType="goods">
+		select gid,gname,price,inprice,pic from t_goods order by hits desc limit 8
+	</select>
+	
+	<select id="selectGoodsType" resultType="goods">
+	select t1.gID, 
+	t1.gName,
+	t1.price,
+	t1.inPrice,
+	t1.pic,
+	t1.description
+	from t_goods t1,
+	t_category t2 where t1.cid=t2.cID and t2.cid=#{cid} 
+		<if test="start !=null and rows != null">
+			limit #{start},#{rows}
+		</if>	
+	</select>
+</mapper>

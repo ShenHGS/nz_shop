@@ -1,0 +1,17 @@
+@charset "UTF-8";
+.dm_table{
+	margin:10px auto;
+	width:40%;
+}
+.dm_table span{
+
+}
+ul{list-style-type:none;
+	text-align: center;
+
+}
+.dm_table>li{
+	text-align:left;
+	font-size:20px;
+	height: 50px;
+}

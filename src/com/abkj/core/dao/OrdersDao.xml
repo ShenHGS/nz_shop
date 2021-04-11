@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+          "http://mybatis.org/dtd/mybatis-3-mapper.dtd"> 
+<mapper namespace="com.abkj.core.dao.OrdersDao"> 
+<sql id="selectOrdersListWhere">
+        <where>
+	       <if test="consignee != null" >
+	           consignee like "%"#{consignee}"%"
+	       </if>
+        </where>
+    </sql>
+	<select id="selectOrdersList" parameterType="orders" 
+                                           resultType="orders">
+		SELECT * FROM t_order
+		<include refid="selectOrdersListWhere"/>
+		<if test="start !=null and rows != null">
+			limit #{start},#{rows}
+		</if>
+	</select>
+	
+	<insert id="insertOrders" parameterType="orders">
+		insert into t_order(
+				mid,
+				create_time,
+				consignee,
+				address,
+				phone,
+				is_payed,
+				payid,
+				amount
+		)
+		values(#{mid},
+				#{create_time},
+				#{consignee},
+				#{address},
+				#{phone},
+				#{is_payed},
+				#{payid},
+				#{amount}
+		)
+	</insert>
+	
+	
+	<select id="selectOrdersListCount" parameterType="orders" 
+                                                 resultType="Integer">
+		select count(*) from t_order
+		<include refid="selectOrdersListWhere"/>
+	</select>	
+<!--  <insert id="createOrders" parameterType="t_order">
+	    insert into (
+	                    money,
+	                    receiverAddress,
+	                    receiverName,
+	                    receiverPhone,
+	                    paystate,
+	                    ordertime
+	             )
+	             values(#{money},
+	                    #{receiverAddress},
+	                    #{receiverName},
+	                    #{receiverPhone},
+	                    #{paystate},
+	                    #{ordertime}
+	                    )
+	</insert>-->
+	<!-- 根据id获取客户信息 -->
+	<select id="getOrdersByMId" parameterType="Integer" 
+	resultType="orders">
+	    select * from t_order where mid = #{mid}
+	</select>
+	<!-- 更新客户 -->
+	<!--<update id="updateOrders" parameterType="orders">
+	    update orders
+	    <set>
+	        <if test="money!=null">
+	            money=#{money},
+	        </if>
+	        <if test="receiverAddress!=null">
+	            receiverAddress=#{receiverAddress},
+	        </if>
+	        <if test="receiverName!=null">
+	            receiverName=#{receiverName},
+	        </if>
+	        <if test="receiverPhone!=null">
+	            receiverPhone=#{receiverPhone},
+	        </if>
+	        <if test="paystate!=null">
+	            paystate=#{paystate},
+	        </if>
+	        <if test="ordertime!=null">
+	            ordertime=#{ordertime},
+	        </if>
+	    </set>
+	    where id=#{id}
+	</update> -->
+	<!-- 删除客户 -->
+	<delete id="deleteOrders" parameterType="Integer">
+	    delete from t_order where oid=#{oid}
+	</delete>
+</mapper>

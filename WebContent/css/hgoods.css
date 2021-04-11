@@ -1,0 +1,54 @@
+
+
+/* 商品 */
+ #g_d1{
+    display: flex; 
+    justify-content: space-between; 
+    flex-flow: row wrap;     
+    position:static;   
+	height:550px;
+	width:70%;
+	margin:30px auto;
+}
+#g_d1:after {content:""; width: 180px; } 
+#g_d2:hover{border:1px solid red;}	 
+#g_d2{
+	
+	height:245px;
+	 width:200px;
+}
+#g_d2_s1{
+	margin:0 0 0 10px;
+	color:red;
+	font-weight:bold;
+	font-size:18px;
+	
+}
+#g_d2_s2{
+	margin:0 0 0 10px;
+	text-decoration:line-through;
+	color:#808080;
+}
+#g_d3{
+	width:75%;
+	font-size:20px;
+	margin:20px auto;
+}
+#g_d3>p>span>a{
+	color:#000000;
+}
+/*  #g_a1{
+	      
+}  */
+#g_a1>span{
+	/* overflow:hidden;  */
+    color: #414141;
+	margin:0 0 0 10px;
+}
+#g_img{
+	height:200px;
+	width:200px;
+}
+#goods_page{	
+	text-align: right;
+}
